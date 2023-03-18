@@ -1,10 +1,10 @@
-package pro.sky.budgetapp;
+package pro.sky.recipeapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BudgetAppApplicationTests {
+class RecipeAppApplicationTests {
 
     @Test
     void contextLoads() {

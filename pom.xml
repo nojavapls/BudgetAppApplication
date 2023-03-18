@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>pro.sky</groupId>
-    <artifactId>BudgetApp</artifactId>
+    <artifactId>RecipeApp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>BudgetApp</name>
-    <description>BudgetApp</description>
+    <name>RecipeApp</name>
+    <description>RecipeApp</description>
     <properties>
         <java.version>11</java.version>
     </properties>

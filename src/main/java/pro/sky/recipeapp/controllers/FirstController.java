@@ -1,7 +1,6 @@
-package pro.sky.budgetapp.controllers;
+package pro.sky.recipeapp.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
