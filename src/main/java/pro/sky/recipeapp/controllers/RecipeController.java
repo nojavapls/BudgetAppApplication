@@ -17,7 +17,7 @@ public class RecipeController {
     }
 
     @PostMapping("/add")
-    public void createRecipe (Recipe recipe) throws IncorectArgumentException {
+    public void createRecipe (@RequestBody Recipe recipe) throws IncorectArgumentException {
         recipeService.putRecipe(recipe);
     }
 

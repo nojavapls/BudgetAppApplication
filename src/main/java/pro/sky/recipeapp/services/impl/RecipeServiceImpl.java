@@ -11,33 +11,6 @@ import java.util.HashMap;
 import java.util.Objects;
 
 @Service
-//public class RecipeServiceImpl implements RecipeService {
-
-//    public static final int SALARY = 120_000;
-//    public static final int AVG_SALARY = (59_000 + 59_000 + 59_000 + 120_000 + 120_000 + 120_000 + 120_000 + 120_000 + 120_000 + 120_000 + 120_000 + 120_000)/12;
-//    public static final double AVG_DAYS = 29.3;
-//    @Override
-//    public int getDailyBudget() {
-//        return SALARY/31;
-//    }
-//
-//    @Override
-//    public int getBalance() {
-//
-//        return SALARY - LocalDate.now().getDayOfMonth() * getDailyBudget();
-//    }
-//
-//    @Override
-//    public int getVacationBonus(int daysCount){
-//        double avgDaySalary = AVG_SALARY / AVG_DAYS;
-//        return (int)(daysCount * avgDaySalary);
-//    }
-//
-//    @Override
-//    public int getSalaryWithVacation(int vacationDaysCount, int vacationWorkingDaysCount, int workingDaysInMonth){
-//        int salary = SALARY / workingDaysInMonth * (workingDaysInMonth - vacationWorkingDaysCount);
-//        return salary + getVacationBonus(vacationDaysCount);
-//    }
 public class RecipeServiceImpl implements RecipeService {
     private final HashMap<Integer, Recipe> recipeMap = new HashMap<>();
     private Integer id = 0;

@@ -6,6 +6,7 @@ import pro.sky.recipeapp.services.exceptions.IncorectArgumentException;
 import pro.sky.recipeapp.services.exceptions.IncorrectIdException;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 @org.springframework.stereotype.Service
 public class IngredientsServiceImpl implements IngredientsService {
@@ -14,7 +15,7 @@ public class IngredientsServiceImpl implements IngredientsService {
 
     @Override
     public void putIngredients(Ingredient ingredient) throws IncorectArgumentException {
-        if (ingredient != null) {
+        if (!Objects.isNull(ingredient)) {
             ingredientsMap.put(id++, ingredient);
         } else {
             throw new IncorectArgumentException("Fill all fields for ingredient");
@@ -26,7 +27,7 @@ public class IngredientsServiceImpl implements IngredientsService {
         if (ingredientsMap.containsKey(id))
             return ingredientsMap.get(id);
         else
-            throw new IncorrectIdException("Not found: recipe " + id);
+            throw new IncorrectIdException("Not found: ingredient " + id);
     }
 
 }

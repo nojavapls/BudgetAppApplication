@@ -15,7 +15,7 @@ public class FirstController {
     public String page() {
         return "Info:\n" +
                 "Name: heykamikaze\n"+
-                "App: BudgetAppApplication\n" +
+                "App: REcipeAppApplication\n" +
                 "Date: 03/17/2023\n" +
                 "Tools: Java, Spring\n";
 

@@ -10,6 +10,7 @@ import java.util.List;
 public class Recipe {
         private final String name;
         private final int cookingTime;
-//        private HashMap<Integer, Ingredient> ingredients;
-//        private final List<String> steps;
-    }
+        private HashMap<Integer, Ingredient> ingredients;
+        private final List<String> steps;
+
+}
