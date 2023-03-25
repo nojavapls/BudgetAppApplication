@@ -16,5 +16,8 @@ import pro.sky.recipeapp.services.exceptions.IncorrectIdException;
          void putRecipe(Recipe recipe) throws IncorectArgumentException;
 
          Recipe getRecipeByID (Integer id) throws IncorrectIdException;
+
+         String editRecipe(int id, Recipe recipe);
+         String deleteRecipe(int id);
     }
 

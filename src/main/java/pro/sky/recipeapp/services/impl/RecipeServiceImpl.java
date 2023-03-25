@@ -15,6 +15,10 @@ public class RecipeServiceImpl implements RecipeService {
     private final HashMap<Integer, Recipe> recipeMap = new HashMap<>();
     private Integer id = 0;
 
+    String ANNOTATION = "Recipe with id ";
+    String EDIT = " has been successfully updated.";
+    String DELETE = " has been successfully deleted";
+    String NOTFOUND = "No recipe with requested id.";
     @Override
     public void putRecipe(Recipe recipe) throws IncorectArgumentException {
         if (!Objects.isNull(recipe)) {
@@ -36,6 +40,24 @@ public class RecipeServiceImpl implements RecipeService {
         if (recipeMap.containsKey(id))
             return recipeMap.get(id);
         else
-            throw new IncorrectIdException("Not found: recipe " + id);
+            throw new IncorrectIdException(NOTFOUND + id);
+    }
+
+    @Override
+    public String editRecipe(int id, Recipe recipe) {
+        if (recipeMap.containsKey(id)) {
+            recipeMap.put(id, recipe);
+            return ANNOTATION + id + EDIT;
+        }
+        return NOTFOUND + id;
+    }
+
+    @Override
+    public String deleteRecipe(int id) {
+        if (recipeMap.containsKey(id)) {
+            recipeMap.remove(id);
+            return ANNOTATION + id + DELETE;
+        }
+        return NOTFOUND + id;
     }
 }
