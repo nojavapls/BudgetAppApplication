@@ -13,6 +13,11 @@ public class IngredientsServiceImpl implements IngredientsService {
     public HashMap<Integer, Ingredient> ingredientsMap = new HashMap<>();
     private Integer id = 0;
 
+    String ANNOTATION = "Ingredient with id ";
+    String EDIT = " has been successfully updated.";
+    String DELETE = " has been successfully deleted";
+    String NOTFOUND = "No Ingredient with id ";
+
     @Override
     public void putIngredients(Ingredient ingredient) throws IncorectArgumentException {
         if (!Objects.isNull(ingredient)) {
@@ -28,6 +33,24 @@ public class IngredientsServiceImpl implements IngredientsService {
             return ingredientsMap.get(id);
         else
             throw new IncorrectIdException("Not found: ingredient " + id);
+    }
+
+    @Override
+    public String editIngredient(Integer id, Ingredient ingredient) {
+        if (ingredientsMap.containsKey(id)) {
+            ingredientsMap.put(id, ingredient);
+            return ANNOTATION + id + EDIT;
+        }
+        return NOTFOUND + id;
+    }
+
+    @Override
+    public String deleteIngredient(Integer id) {
+        if (ingredientsMap.containsKey(id)) {
+            ingredientsMap.remove(id);
+            return ANNOTATION + id + DELETE;
+        }
+        return NOTFOUND + id;
     }
 
 }

@@ -10,4 +10,7 @@ public interface IngredientsService {
         void putIngredients(Ingredient ingredient) throws IncorectArgumentException;
 
         Ingredient getIngredientByID (Integer id) throws IncorrectIdException;
+        String deleteIngredient(Integer id);
+
+        String editIngredient(Integer id, Ingredient ingredient);
 }
