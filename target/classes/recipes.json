@@ -1,0 +1,1 @@
+Recipe(name=Мороженое, cookingTime=30, ingredients=[Ingredient(name=сливки, quantity=1, unit=литр), Ingredient(name=ягоды, quantity=10, unit=штук)], steps=[Смешать])
