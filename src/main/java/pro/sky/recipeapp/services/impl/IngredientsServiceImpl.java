@@ -1,6 +1,9 @@
 package pro.sky.recipeapp.services.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import pro.sky.recipeapp.model.Ingredient;
+import pro.sky.recipeapp.services.FilesService;
 import pro.sky.recipeapp.services.IngredientsService;
 import pro.sky.recipeapp.services.exceptions.IncorectArgumentException;
 import pro.sky.recipeapp.services.exceptions.IncorrectIdException;
@@ -10,31 +13,33 @@ import java.util.HashMap;
 import java.util.Objects;
 
 @org.springframework.stereotype.Service
-public class IngredientsServiceImpl extends IngredientsFilesService implements IngredientsService {
+
+public class IngredientsServiceImpl implements IngredientsService {
     public HashMap<Integer, Ingredient> ingredientsMap = new HashMap<>();
     private Integer id = 0;
 
-//    private final IngredientsFilesService fileService;
+    private IngredientsFilesService fileService;
 
     String ANNOTATION = "Ingredient with id ";
     String EDIT = " has been successfully updated.";
     String DELETE = " has been successfully deleted";
     String NOTFOUND = "No Ingredient with id ";
 
-//    public IngredientsServiceImpl(IngredientsFilesService fileService) {
-//        this.fileService = fileService;
-//    }
+    public IngredientsServiceImpl(IngredientsFilesService fileService) {
+        this.fileService = fileService;
+    }
 
     @PostConstruct
     private void init(){
-        readFromFile();
+        fileService.readFromFile();
     }
 
     @Override
-    public void putIngredients(Ingredient ingredient) throws IncorectArgumentException {
+    public void putIngredients(Ingredient ingredient) throws IncorectArgumentException, JsonProcessingException {
         if (!Objects.isNull(ingredient)) {
             ingredientsMap.put(id++, ingredient);
-            saveToFile(String.valueOf(ingredient));
+            String json = new ObjectMapper().writeValueAsString(ingredient);
+            fileService.saveToFile(json);
         } else {
             throw new IncorectArgumentException("Fill all fields for ingredient");
         }
@@ -49,10 +54,11 @@ public class IngredientsServiceImpl extends IngredientsFilesService implements I
     }
 
     @Override
-    public String editIngredient(Integer id, Ingredient ingredient) {
+    public String editIngredient(Integer id, Ingredient ingredient) throws JsonProcessingException {
         if (ingredientsMap.containsKey(id)) {
             ingredientsMap.put(id, ingredient);
-            saveToFile(String.valueOf(ingredient));
+            String json = new ObjectMapper().writeValueAsString(ingredient);
+            fileService.saveToFile(json);
             return ANNOTATION + id + EDIT;
         }
         return NOTFOUND + id;
@@ -62,7 +68,7 @@ public class IngredientsServiceImpl extends IngredientsFilesService implements I
     public String deleteIngredient(Integer id) {
         if (ingredientsMap.containsKey(id)) {
             ingredientsMap.remove(id);
-            cleanDataFile();
+            fileService.cleanDataFile();
             return ANNOTATION + id + DELETE;
         }
         return NOTFOUND + id;

@@ -1,12 +1,15 @@
 package pro.sky.recipeapp.services.impl;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import pro.sky.recipeapp.services.FilesService;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+@Service
 public class IngredientsFilesService implements FilesService {
 
     @Value("${path.to.data.file}")
@@ -49,4 +52,21 @@ public class IngredientsFilesService implements FilesService {
             return false;
         }
     }
-}
+
+    @Override
+    public boolean saveRecipes(String json) {
+        return false;
+    }
+
+    @Override
+    public File getRecipesFile() {
+        return null;
+    }
+
+    @Override
+    public File getIngredientsFile() {
+
+            return new File(dataFilePath + "/" + ingredientFileName);
+        }
+    }
+
