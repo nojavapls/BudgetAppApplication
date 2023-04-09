@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pro.sky.recipeapp.services.FilesService;
 import pro.sky.recipeapp.services.impl.IngredientsFilesService;
+import pro.sky.recipeapp.services.impl.RecipeFilesServiceImpl;
 
 import java.io.*;
 
@@ -29,12 +30,12 @@ import java.io.*;
 //        private String ingredientFileName;
 //        @Value("${name.of.recipe.file}")
 //        private String recipesFileName;
-        private final FilesService filesService;
+        private final RecipeFilesServiceImpl filesService;
         private final IngredientsFilesService ingredientsFilesService;
 
 
 
-    public FilesController(FilesService filesService, IngredientsFilesService ingredientsFilesService) {
+    public FilesController(RecipeFilesServiceImpl filesService, IngredientsFilesService ingredientsFilesService) {
             this.filesService = filesService;
             this.ingredientsFilesService = ingredientsFilesService;
     }
@@ -67,7 +68,7 @@ import java.io.*;
 
         )
         public ResponseEntity<InputStreamResource> downloadRecipes() throws FileNotFoundException {
-            File file = filesService.getRecipesFile();
+            File file = filesService.getDataFile();
             if (file.exists()) {
                 InputStreamResource isr = new InputStreamResource(new FileInputStream(file));
                 return ResponseEntity
@@ -99,7 +100,7 @@ import java.io.*;
     })
     public ResponseEntity<Void> updateRecipes(@RequestParam MultipartFile file) {
         filesService.cleanDataFile();
-        File recipesFile = filesService.getRecipesFile();
+        File recipesFile = filesService.getDataFile();
         try (FileOutputStream fos = new FileOutputStream(recipesFile)) {
             IOUtils.copy(file.getInputStream(), fos);
             return ResponseEntity.ok().build();
@@ -129,7 +130,7 @@ import java.io.*;
     })
     public ResponseEntity<Void> updateIngredientsFile(@RequestParam MultipartFile file){
         ingredientsFilesService.cleanDataFile();
-        File ingredientsFile = ingredientsFilesService.getIngredientsFile();
+        File ingredientsFile = ingredientsFilesService.getDataFile();
         try (FileOutputStream fos = new FileOutputStream(ingredientsFile)){
             IOUtils.copy(file.getInputStream(), fos);
             return ResponseEntity.ok().build();

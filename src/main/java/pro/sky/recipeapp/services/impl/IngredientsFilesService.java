@@ -58,13 +58,13 @@ public class IngredientsFilesService implements FilesService {
         return false;
     }
 
-    @Override
-    public File getRecipesFile() {
-        return null;
-    }
+//    @Override
+//    public File getRecipesFile() {
+//        return null;
+//    }
 
     @Override
-    public File getIngredientsFile() {
+    public File getDataFile() {
 
             return new File(dataFilePath + "/" + ingredientFileName);
         }

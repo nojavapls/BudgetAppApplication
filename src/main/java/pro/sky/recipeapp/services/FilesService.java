@@ -13,7 +13,9 @@ public interface FilesService {
 
     boolean saveRecipes(String json);
 
-    File getRecipesFile();
+//    File getRecipesFile();
+//
+//    File getIngredientsFile();
 
-    File getIngredientsFile();
+    File getDataFile();
 }

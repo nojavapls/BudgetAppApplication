@@ -66,12 +66,12 @@ public class RecipeFilesServiceImpl implements FilesService {
     }
 
     @Override
-    public File getRecipesFile() {
+    public File getDataFile() {
         return new File(dataFilePath + "/" + recipeFileName);
     }
-
-    @Override
-    public File getIngredientsFile() {
-        return null;
-    }
+//
+//    @Override
+//    public File getIngredientsFile() {
+//        return null;
+//    }
 }
