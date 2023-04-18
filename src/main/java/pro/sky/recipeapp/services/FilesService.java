@@ -9,13 +9,6 @@ public interface FilesService {
     String readFromFile();
 
     boolean cleanDataFile();
-//    boolean saveIngredients(String json);
-
-    boolean saveRecipes(String json);
-
-//    File getRecipesFile();
-//
-//    File getIngredientsFile();
 
     File getDataFile();
 }

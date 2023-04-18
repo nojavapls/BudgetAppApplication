@@ -19,6 +19,8 @@ public class IngredientsServiceImpl implements IngredientsService {
     private Integer id = 0;
 
     private IngredientsFilesService fileService;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
 
     String ANNOTATION = "Ingredient with id ";
     String EDIT = " has been successfully updated.";
@@ -34,12 +36,20 @@ public class IngredientsServiceImpl implements IngredientsService {
         fileService.readFromFile();
     }
 
+    private void save(Ingredient ingredient) {
+        try {
+            String json = objectMapper.writeValueAsString(ingredient);
+            filesService.saveToFile(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void putIngredients(Ingredient ingredient) throws IncorectArgumentException, JsonProcessingException {
         if (!Objects.isNull(ingredient)) {
             ingredientsMap.put(id++, ingredient);
-            String json = new ObjectMapper().writeValueAsString(ingredient);
-            fileService.saveToFile(json);
+            save(ingredient);
         } else {
             throw new IncorectArgumentException("Fill all fields for ingredient");
         }
@@ -57,8 +67,7 @@ public class IngredientsServiceImpl implements IngredientsService {
     public String editIngredient(Integer id, Ingredient ingredient) throws JsonProcessingException {
         if (ingredientsMap.containsKey(id)) {
             ingredientsMap.put(id, ingredient);
-            String json = new ObjectMapper().writeValueAsString(ingredient);
-            fileService.saveToFile(json);
+            save(ingredient);
             return ANNOTATION + id + EDIT;
         }
         return NOTFOUND + id;
@@ -68,10 +77,8 @@ public class IngredientsServiceImpl implements IngredientsService {
     public String deleteIngredient(Integer id) {
         if (ingredientsMap.containsKey(id)) {
             ingredientsMap.remove(id);
-            fileService.cleanDataFile();
             return ANNOTATION + id + DELETE;
         }
         return NOTFOUND + id;
     }
-
 }
