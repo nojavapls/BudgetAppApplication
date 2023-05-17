@@ -27,6 +27,7 @@ public class RecipeFilesServiceImpl implements FilesService {
             Files.writeString(Path.of(dataFilePath, recipeFileName), json);
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -52,18 +53,7 @@ public class RecipeFilesServiceImpl implements FilesService {
         }
     }
 
-    @Override
-    public boolean saveRecipes(String json) {
-        Path path = Path.of(dataFilePath, recipeFileName);
-        try {
-            cleanDataFile();
-            Files.writeString(path, json);
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+
 
     @Override
     public File getDataFile() {

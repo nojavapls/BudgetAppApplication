@@ -31,9 +31,10 @@ public class IngredientsFilesService implements FilesService {
     }
 
     @Override
-    public String readFromFile() {
+    public void readFromFile() {
+
         try {
-            return Files.readString(Path.of(dataFilePath, ingredientFileName));
+            mapIngred =  objectMapper.readValue(filesService.readIngredients(), new TypeReference<HashMap<Integer, Ingredient>>() {});
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -53,15 +54,6 @@ public class IngredientsFilesService implements FilesService {
         }
     }
 
-    @Override
-    public boolean saveRecipes(String json) {
-        return false;
-    }
-
-//    @Override
-//    public File getRecipesFile() {
-//        return null;
-//    }
 
     @Override
     public File getDataFile() {
