@@ -1,15 +1,18 @@
 package pro.sky.recipeapp.services.impl;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import pro.sky.recipeapp.services.FilesService;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 @Service
+@Primary
 public class RecipeFilesServiceImpl implements FilesService {
     @Value("${path.to.data.file}")
     private String dataFilePath;
@@ -24,6 +27,7 @@ public class RecipeFilesServiceImpl implements FilesService {
             Files.writeString(Path.of(dataFilePath, recipeFileName), json);
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -48,4 +52,16 @@ public class RecipeFilesServiceImpl implements FilesService {
             return false;
         }
     }
+
+
+
+    @Override
+    public File getDataFile() {
+        return new File(dataFilePath + "/" + recipeFileName);
+    }
+//
+//    @Override
+//    public File getIngredientsFile() {
+//        return null;
+//    }
 }

@@ -1,5 +1,6 @@
 package pro.sky.recipeapp.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -25,7 +26,7 @@ public class IngredientsController {
         }
 
         @PostMapping("/add")
-        public void addIngredients (@RequestBody Ingredient ingredient) throws IncorectArgumentException {
+        public void addIngredients (@RequestBody Ingredient ingredient) throws IncorectArgumentException, JsonProcessingException {
             ingredientsService.putIngredients(ingredient);
         }
 
@@ -51,7 +52,7 @@ public class IngredientsController {
                     }
             )
     })
-    public ResponseEntity<String> editIngredient(@PathVariable int id, @RequestBody Ingredient ingredient) {
+    public ResponseEntity<String> editIngredient(@PathVariable int id, @RequestBody Ingredient ingredient) throws JsonProcessingException {
         String responce = ingredientsService.editIngredient(id, ingredient);
         if (responce.equals(NOTFOUND)) {
             return ResponseEntity.notFound().build();

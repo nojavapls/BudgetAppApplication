@@ -1,5 +1,6 @@
 package pro.sky.recipeapp.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class RecipeController {
             @ApiResponse(responseCode = "200",
                          description = "New recipe added.")
     })
-    public void createRecipe (@RequestBody Recipe recipe) throws IncorectArgumentException {
+    public void createRecipe (@RequestBody Recipe recipe) throws IncorectArgumentException, JsonProcessingException {
         recipeService.putRecipe(recipe);
     }
 
@@ -73,7 +74,7 @@ public class RecipeController {
                             )
                     })
     })
-    public ResponseEntity<String> editRecipe (@PathVariable int id, @RequestBody Recipe recipe) {
+    public ResponseEntity<String> editRecipe (@PathVariable int id, @RequestBody Recipe recipe) throws JsonProcessingException {
         String responce = recipeService.editRecipe(id, recipe);
         if (responce.equals(NOTFOUND)) {
             return ResponseEntity.notFound().build();
